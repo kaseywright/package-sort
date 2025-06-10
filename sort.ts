@@ -1,53 +1,66 @@
 /**
+ * Represents a package with dimensions and mass.
+ * All dimensions are in centimeters, mass is in kilograms.
+ */
+export interface Package {
+    width: number;
+    height: number;
+    length: number;
+    mass: number;
+}
+
+/**
+ * Classification constants for package classification.
+ */
+export enum Classification {
+    STANDARD = "STANDARD",
+    SPECIAL = "SPECIAL",
+    REJECTED = "REJECTED"
+}
+
+/**
  * Sorts a package based on its dimensions and mass.
  *
- * @param width - The width of the package in centimeters (cm).
- * @param height - The height of the package in centimeters (cm).
- * @param length - The length of the package in centimeters (cm).
- * @param mass - The mass of the package in kilograms (kg).
- * @returns {string} - Returns "REJECTED", "SPECIAL", or "STANDARD" based on the package properties.
- * @throws {Error} - Throws an error if any of the parameters are non-numeric, negative, or zero.
+ * @param pkg - The package to sort.
+ * @returns {Classification} - Returns Classification.REJECTED, Classification.SPECIAL, or Classification.STANDARD based on the package properties.
+ * @throws {Error} - Throws an error if any of the package parameters are non-numeric, negative, or zero.
  */
-export function sort(width: number, height: number, length: number, mass: number): string {
+export function sort(pkg: Package): Classification {
     const DIMENSION_THRESHOLD = 150;
     const WEIGHT_THRESHOLD = 20;
     const VOLUME_THRESHOLD = 1000000;
 
-    if (! validateParameters(width, height, length, mass)) {
-        throw new Error("Invalid parameter: all inputs must be a valid positive number.");
+    if (! validateParameters(pkg)) {
+        throw new Error("Invalid package: all package parameters must be valid positive numbers.");
     }
 
-    let is_bulky = (width * height * length) >= VOLUME_THRESHOLD 
-        || width >= DIMENSION_THRESHOLD 
-        || height >= DIMENSION_THRESHOLD 
-        || length >= DIMENSION_THRESHOLD;
+    let is_bulky = (pkg.width * pkg.height * pkg.length) >= VOLUME_THRESHOLD 
+        || pkg.width >= DIMENSION_THRESHOLD 
+        || pkg.height >= DIMENSION_THRESHOLD 
+        || pkg.length >= DIMENSION_THRESHOLD;
 
-    let is_heavy = mass >= WEIGHT_THRESHOLD;
+    let is_heavy = pkg.mass >= WEIGHT_THRESHOLD;
 
     if (is_bulky && is_heavy) {
-        return "REJECTED";
+        return Classification.REJECTED;
     } else if (is_bulky || is_heavy) {
-        return "SPECIAL";
+        return Classification.SPECIAL;
     } else {
-        return "STANDARD";
+        return Classification.STANDARD;
     }
 }
 
 /**
- * Validates that all parameters are positive numbers.
+ * Validates that a package has all required numeric, positive properties.
  *
- * @param width - The width in centimeters (cm).
- * @param height - The height in centimeters (cm).
- * @param length - The length in centimeters (cm).
- * @param mass - The mass in kilograms (kg).
- * @returns {boolean} - True if all parameters are valid positive numbers, false otherwise.
+ * @param pkg - The package to validate.
+ * @returns {boolean} - True if valid, false otherwise.
  */
-function validateParameters(width: number, height: number, length: number, mass: number): boolean {
-    if (
-        !isNonNegativeNumber(width) 
-        || !isNonNegativeNumber(height) 
-        || !isNonNegativeNumber(length) 
-        || !isNonNegativeNumber(mass)
+function validateParameters(pkg: Package): boolean {
+    if (! isNonNegativeNumber(pkg.width) 
+        || !isNonNegativeNumber(pkg.height) 
+        || !isNonNegativeNumber(pkg.length) 
+        || !isNonNegativeNumber(pkg.mass)
     ) {
         return false;
     }
