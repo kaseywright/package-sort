@@ -1,3 +1,12 @@
+/**
+ * Sorts a package based on its dimensions and mass.
+ *
+ * @param width - The width of the package in centimeters (cm).
+ * @param height - The height of the package in centimeters (cm).
+ * @param length - The length of the package in centimeters (cm).
+ * @param mass - The mass of the package in kilograms (kg).
+ * @returns {string} - Returns "REJECTED", "SPECIAL", or "STANDARD" based on the package properties.
+ */
 export function sort(width: number, height: number, length: number, mass: number): string {
     const DIMENSION_THRESHOLD = 150;
     const WEIGHT_THRESHOLD = 20;
@@ -23,6 +32,15 @@ export function sort(width: number, height: number, length: number, mass: number
     }
 }
 
+/**
+ * Validates that all parameters are positive numbers.
+ *
+ * @param width - The width in centimeters (cm).
+ * @param height - The height in centimeters (cm).
+ * @param length - The length in centimeters (cm).
+ * @param mass - The mass in kilograms (kg).
+ * @returns {boolean} - True if all parameters are valid positive numbers, false otherwise.
+ */
 function validateParameters(width: number, height: number, length: number, mass: number): boolean {
     if (isNaN(width) || width <= 0) {
         return false;
@@ -39,21 +57,3 @@ function validateParameters(width: number, height: number, length: number, mass:
 
     return true;
 }
-
-sort(1, 2, 3, 5); //?
-sort(1, 2, 3, 40); //? 
-sort(1, 2, 200, 10); //?
-sort(1, 200, 3, 5); //?
-sort(200, 2, 3, 5); //?
-sort(1, 2, 3, 20); //?
-sort(1, 2, 150, 20); //?
-sort(1, 150, 3, 20); //?
-sort(150, 2, 3, 20); //?
-sort("1", 2, 3, 20); //?
-sort(1, "2", 3, 20); //?
-sort(1, 2, "3", 20); //?
-sort(1, 2, 3, "20"); //?
-sort(-13, 20, 20, 15); //?
-sort(13, -20, 20, 15);
-sort(13, 20, -20, 15);
-sort(13, 20, 20, -15);
