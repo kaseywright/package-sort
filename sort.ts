@@ -19,6 +19,14 @@ export enum Classification {
 }
 
 /**
+ * Threshold constants for package classification.
+ * Could be set via environment variables or configuration file.
+ */
+const DIMENSION_THRESHOLD = 150; // cm
+const WEIGHT_THRESHOLD = 20; // kg
+const VOLUME_THRESHOLD = 1000000; // cubic cm
+
+/**
  * Sorts a package based on its dimensions and mass.
  *
  * @param pkg - The package to sort.
@@ -26,10 +34,6 @@ export enum Classification {
  * @throws {Error} - Throws an error if any of the package parameters are non-numeric, negative, or zero.
  */
 export function sort(pkg: Package): Classification {
-    const DIMENSION_THRESHOLD = 150;
-    const WEIGHT_THRESHOLD = 20;
-    const VOLUME_THRESHOLD = 1000000;
-
     if (! validateParameters(pkg)) {
         throw new Error("Invalid package: all package parameters must be valid positive numbers.");
     }
