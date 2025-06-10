@@ -1,5 +1,8 @@
 # package-sort
 
+This is a simple package sorting function that classifies packages based on their dimensions and mass.
+The functional requirements can be found in [Requirements.md](Requirements.md).
+
 The presented `sort` function contains more optimizations than the requirements demand to better demonstrate extensibility and performance expected in production-ready code.
 
 AI was used to as a pair programmer to help me write this code efficiently. However, the patterns and practices used are of my own guidence.
