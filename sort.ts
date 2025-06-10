@@ -61,10 +61,10 @@ export function sort(pkg: Package): Classification {
  * @returns {boolean} - True if valid, false otherwise.
  */
 function validateParameters(pkg: Package): boolean {
-    if (! isNonNegativeNumber(pkg.width) 
-        || !isNonNegativeNumber(pkg.height) 
-        || !isNonNegativeNumber(pkg.length) 
-        || !isNonNegativeNumber(pkg.mass)
+    if (! isPositiveNumber(pkg.width) 
+        || !isPositiveNumber(pkg.height) 
+        || !isPositiveNumber(pkg.length) 
+        || !isPositiveNumber(pkg.mass)
     ) {
         return false;
     }
@@ -72,6 +72,6 @@ function validateParameters(pkg: Package): boolean {
     return true;
 }
 
-function isNonNegativeNumber(value: number): boolean {
-    return typeof value === 'number' && !isNaN(value) && value >= 0;
+function isPositiveNumber(value: number): boolean {
+    return typeof value === 'number' && !isNaN(value) && value > 0;
 }
