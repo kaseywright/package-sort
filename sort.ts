@@ -6,6 +6,7 @@
  * @param length - The length of the package in centimeters (cm).
  * @param mass - The mass of the package in kilograms (kg).
  * @returns {string} - Returns "REJECTED", "SPECIAL", or "STANDARD" based on the package properties.
+ * @throws {Error} - Throws an error if any of the parameters are non-numeric, negative, or zero.
  */
 export function sort(width: number, height: number, length: number, mass: number): string {
     const DIMENSION_THRESHOLD = 150;
@@ -42,18 +43,18 @@ export function sort(width: number, height: number, length: number, mass: number
  * @returns {boolean} - True if all parameters are valid positive numbers, false otherwise.
  */
 function validateParameters(width: number, height: number, length: number, mass: number): boolean {
-    if (isNaN(width) || width <= 0) {
-        return false;
-    }
-    if (isNaN(height) || height <= 0) {
-        return false;
-    }
-    if (isNaN(length) || length <= 0) {
-        return false;
-    }
-    if (isNaN(mass) || mass <= 0) {
+    if (
+        !isNonNegativeNumber(width) 
+        || !isNonNegativeNumber(height) 
+        || !isNonNegativeNumber(length) 
+        || !isNonNegativeNumber(mass)
+    ) {
         return false;
     }
 
     return true;
+}
+
+function isNonNegativeNumber(value: number): boolean {
+    return typeof value === 'number' && !isNaN(value) && value >= 0;
 }
