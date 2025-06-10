@@ -1,0 +1,14 @@
+{
+  "name": "package-sort",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "jest": "^30.0.0"
+  }
+}
