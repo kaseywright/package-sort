@@ -28,3 +28,7 @@ To run tests:
 ```bash
 bun test sort.test.ts
 ```
+
+## Demos
+
+Demos and versions of this sort function written in other languages can be found in the [`demos`](demos) directory.
